@@ -1,0 +1,111 @@
+
+<div class="pageContent">
+	<form method="post" action="stadium/addstadiumFunc"enctype="multipart/form-data" class="pageForm required-validate" onsubmit="return iframeCallback(this, dialogAjaxDone);">
+		<div class="pageFormContent" layoutH="56">
+			<table cellpadding="3" cellspacing="3" class="l-table-edit" >
+            <tr>
+                <td align="right" class="l-table-edit-td">所属公司: </td>
+                <td align="left" class="l-table-edit-td">
+                <?php echo Phalcon\Tag::selectStatic("belongComId", $companyList);//输出下拉框 参数1、name名称和id 参数2、属性值 A为下拉框的value值 ?>
+                <input type="hidden" name="addUser" value="<?php echo $userInfo['userId'];?>">
+ 				<input type="hidden" name="addIp" value="<?php echo $userInfo['userIp'];?>">	
+                	<td align="left"></td>
+            </tr>
+            <tr>
+                <td align="right" class="l-table-edit-td" valign="top">上传封面图片:</td>
+                <td align="left" class="l-table-edit-td">
+                <input type="file" name="picUrl"/>
+                <label id='url' style="color:red"></label>
+                 </td><td align="left"></td>
+            </tr>   
+             <tr>
+                <td align="right" class="l-table-edit-td">场馆名称: </td>
+                <td align="left" class="l-table-edit-td">
+                <?php echo Phalcon\Tag::textField(array("staName","class"=>"required", "size" => 20)); ?>
+                <label id="name"style="color:red"></label>
+                <td align="left"></td>
+            </tr>
+            <tr>
+                <td align="right" class="l-table-edit-td">场馆地址: </td>
+                <td align="left" class="l-table-edit-td">
+                <?php echo Phalcon\Tag::textField(array("staAddress","class"=>"required", "size" => 30)); ?>
+                <label id="address"style="color:red"></label>
+                <td align="left"></td>
+            </tr>
+            <tr>
+                <td align="right" class="l-table-edit-td">场馆容量: </td>
+                <td align="left" class="l-table-edit-td">
+                <?php echo Phalcon\Tag::textField(array("staSize","class"=>"required", "size" => 20)); ?>
+                <label id='size'style="color:red"></label>
+                <td align="left"></td>
+            </tr>
+            <tr>
+                <td align="right" class="l-table-edit-td">场馆经度: </td>
+                <td align="left" class="l-table-edit-td">
+                <?php echo Phalcon\Tag::textField(array("gpsLong","class"=>"number", "size" => 10)); ?>
+                <label id='long'style="color:red"></label>
+                <td align="left"></td>
+            </tr>
+            <tr>
+                <td align="right" class="l-table-edit-td">场馆纬度: </td>
+                <td align="left" class="l-table-edit-td">
+                <?php echo Phalcon\Tag::textField(array("gpsDim","class"=>"number", "size" => 10)); ?>
+                <label id='dim'style="color:red"></label>
+                <td align="left"></td>
+            </tr>
+        </table>
+			
+		</div>
+		<div class="formBar">
+			<ul>
+				<!--<li><a class="buttonActive" href="javascript:;"><span>保存</span></a></li>-->
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li>
+					<div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div>
+				</li>
+			</ul>
+		</div>
+	</form>
+</div>
+    <script type="text/javascript">
+    function check(){
+     var staName=$(":input[name='staName']").val();
+     var picUrl=$(":input[name='picUrl']").val();
+     var staAddress=$(":input[name='staAddress']").val();
+     var staSize=$(":input[name='staSize']").val();
+     var gpsLong=$(":input[name='gpsLong']").val();
+     var gpsDim=$(":input[name='gpsDim']").val();
+     if (picUrl==''){
+     	document.getElementById("url").innerHTML='* 图片不能为空！';
+     	return false;
+     }
+     else 
+     if (staName==''){
+     	document.getElementById("name").innerHTML='* 场馆名称不能为空！';
+     	return false;
+     }
+     else if (staAddress==''){
+     	document.getElementById("address").innerHTML='* 场馆地址不能为空！';
+     	return false;
+     }
+     else if (staSize==''){
+     	document.getElementById("size").innerHTML='* 场馆容量不能为空！';
+     	return false;
+     }
+     else if (gpsLong==''){
+     	document.getElementById("long").innerHTML='* 经度不能为空！';
+     	return false;
+     	
+     }
+     else if (gpsDim==''){
+     	document.getElementById("dim").innerHTML='* 纬度不能为空！';
+     	return false;
+     }
+     
+    else {
+                         document.getElementById('form1').submit();
+                     
+  		}
+  	}
+    </script>
+

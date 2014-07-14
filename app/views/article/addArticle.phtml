@@ -1,0 +1,47 @@
+
+<div class="pageContent">
+	<form method="post" action="article/saveArticle" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone);">
+		<div class="pageFormContent" layoutH="56">
+			<table>
+				<tr>
+				    <td height="50px" aligh="right">文章标题 : &nbsp;&nbsp;&nbsp;&nbsp;</td>
+					<td aligh="left">
+	                <?php echo Phalcon\Tag::textField(array("artTitle", "class"=>"required","size" => 30,"validate"=>'{required:true,minlength:3,maxlength:50}'));?>
+					</td>
+				</tr>
+				<tr>
+					<td height="50px" aligh="right">文章内容: </td>
+					<td aligh="left"><textarea class="editor" name="artContent" rows="30" cols="120"></textarea>
+					</td>
+				</tr>
+				<tr>
+					<td height="50px" aligh="right">发布时间: </td>
+					<td aligh="left"><input class='date'type="text" name="artTime" /><a class="inputDateButton" href="javascript:;">选择</a>				</td>
+				</tr>
+				</table>
+		</div>
+		<div class="formBar">
+			<ul>
+				<!--<li><a class="buttonActive" href="javascript:;"><span>保存</span></a></li>-->
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li>
+					<div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div>
+				</li>
+			</ul>
+		</div>
+	</form>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

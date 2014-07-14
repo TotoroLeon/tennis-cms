@@ -1,0 +1,36 @@
+
+<div class="pageContent">
+	<form method="post" action="company/addCompanyFunc" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone);">
+		<div class="pageFormContent" layoutH="56">
+			<p>
+				<label>公司名称</label>
+				
+                <?php echo Phalcon\Tag::textField(array("companyName", "class"=>"required","size" => 30,"validate"=>'{required:true,minlength:3,maxlength:10}'));?>
+				</p>
+			
+		</div>
+		<div class="formBar">
+			<ul>
+				<!--<li><a class="buttonActive" href="javascript:;"><span>保存</span></a></li>-->
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li>
+					<div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div>
+				</li>
+			</ul>
+		</div>
+	</form>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

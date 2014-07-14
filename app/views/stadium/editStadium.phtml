@@ -1,0 +1,99 @@
+<div class="pageContent">
+	<form method="post" action="stadium/editStadium" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<div class="pageFormContent" layoutH="56">
+			<table cellpadding="0" cellspacing="0" class="l-table-edit" >
+            <tr>
+                <td align="right"  width="80px"class="l-table-edit-td">所属公司 :</td>
+                <td align="left" class="l-table-edit-td">
+                <select name="belongComId">
+                <?php 
+                foreach ($companyInfo as $key=>$value){
+                	if($key==$staInfo['belongComId']){
+                		echo '<option value='.$key.' selected>'.$value;
+                	}else{
+                		echo '<option value='.$key.' >'.$value;
+                	}
+                }
+                ?>
+                </select>
+                	<td align="left"></td>
+            </tr>
+            <tr>
+                <td align="right" class="l-table-edit-td" valign="top">选择封面图片:</td>
+                <td align="left" class="l-table-edit-td">
+                <?php 
+                foreach ($pictureInfo as $key=>$value){
+                	if($staInfo['staPicture']==$value['picId']){
+                		echo'<input type="radio" name="staPicture" value="'.$value['picId'].'"checked />' ;
+                		echo '<img src="images\\'.$value['picUrl'].'" width="100" height="100" />';
+                	}
+                	else{
+                		echo Phalcon\Tag::radioField(array("staPicture", "value"=>$value['picId'],"size" => 30,));
+                		echo '<img src="images\\'.$value['picUrl'].'" width="100" height="100" />';
+                	}
+                }
+                ?>
+                 </td><td align="left"></td>
+            </tr>   
+             <tr>
+                <td align="right" class="l-table-edit-td">场馆名称:</td>
+                <td align="left" class="l-table-edit-td">
+                <?php echo Phalcon\Tag::textField(array("staName", "size" => 20,'value'=>$staInfo['staName'])); ?>
+                <td align="left"></td>
+            </tr>
+            <tr>
+                <td align="right" class="l-table-edit-td">场馆地址:</td>
+                <td align="left" class="l-table-edit-td">
+                <?php echo Phalcon\Tag::textField(array("staAddress", "size" => 30,'value'=>$staInfo['staAddress'])); ?>
+                <td align="left"></td>
+            </tr>
+            <tr>
+                <td align="right" class="l-table-edit-td">场馆容量:</td>
+                <td align="left" class="l-table-edit-td">
+                <?php echo Phalcon\Tag::textField(array("staSize", "size" => 20,'value'=>$staInfo['staSize'])); ?>
+                <td align="left"></td>
+            </tr>
+            <tr>
+                <td align="right" class="l-table-edit-td">场馆经度:</td>
+                <td align="left" class="l-table-edit-td">
+                <?php echo Phalcon\Tag::textField(array("gpsLong", "size" => 10,'value'=>$staInfo['gpsLong'])); ?>
+                <td align="left"></td>
+            </tr>
+            <tr>
+                <td align="right" class="l-table-edit-td">场馆纬度:</td>
+                <td align="left" class="l-table-edit-td">
+                <?php echo Phalcon\Tag::textField(array("gpsDim", "size" => 10,'value'=>$staInfo['gpsDim'])); ?>
+                <td align="left"></td>
+            </tr>
+        </table>
+		</div>
+		<div class="formBar">
+			<ul>
+				<!--<li><a class="buttonActive" href="javascript:;"><span>保存</span></a></li>-->
+				<li><div class="buttonActive"><div class="buttonContent">
+				<input type="hidden" name="addUser" value="<?php echo 2;?>">
+ 				<input type="hidden" name="addIp" value="<?php echo 12121121;?>">
+ 				<input type="hidden" name="staId" value="<?php echo $staInfo['staId'];?>">
+  				<input type="hidden" name="sub" value="提交"/>
+				<button type="submit">保存</button></div></div></li>
+				<li>
+					<div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div>
+				</li>
+			</ul>
+		</div>
+	</form>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

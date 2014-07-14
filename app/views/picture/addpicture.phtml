@@ -1,0 +1,95 @@
+
+<script type="text/javascript" src="uploadify/jquery.uploadify-3.1.min.js"></script>
+<link rel="stylesheet" type="text/css" href="uploadify/uploadify.css"/>
+<script type="text/javascript">
+var img_id_upload=new Array();//初始化数组，存储已经上传的图片名
+var i=0;//初始化数组下标
+$(function() {
+    $('#file_upload').uploadify({
+    	'auto'     : false,//关闭自动上传
+    	'removeTimeout' : 1,//文件队列上传完成1秒后删除
+        'swf'      : 'uploadify/uploadify.swf',
+        'uploader' : 'picture/addPictureFunc',
+        'method'   : 'post',//方法，服务端可以用$_POST数组获取数据
+		'buttonText' : '</br>选择图片',//设置按钮文本
+        'multi'    : true,//允许同时上传多张图片
+        'uploadLimit' : 10,//一次最多只允许上传10张图片
+        'fileTypeDesc' : 'Image Files',//只允许上传图像
+        'fileTypeExts' : '*.gif; *.jpg; *.png',//限制允许上传的图片后缀
+        'fileSizeLimit' : '20000KB',//限制上传的图片不得超过200KB 
+        'onUploadSuccess' : function(file, data, response) {//每次成功上传后执行的回调函数，从服务端返回数据到前端
+               img_id_upload[i]=data;
+               i++;
+			   //alert(data);
+        },
+        'onQueueComplete' : function(queueData) {//上传队列全部完成后执行的回调函数
+            if(img_id_upload.length>0)
+            alert('上传成功');
+        }  
+        // Put your options here
+    });
+});
+</script>
+<div class="pageContent">
+	<form method="post" action="picture/addPictureFunc" enctype="multipart/form-data"class="pageForm required-validate" onsubmit="return iframeCallback(this,dialogAjaxDone);">
+		<div class="pageFormContent" layoutH="56">
+			<p>
+				<table cellpadding="0" cellspacing="0" class="l-table-edit" >
+            <tr>
+                <td align="right" class="l-table-edit-td" height="50px">所属场馆 : &nbsp;</td>
+                <td align="left" class="l-table-edit-td">
+                <?php echo Phalcon\Tag::selectStatic("stadiumId", $stadiumList);//输出下拉框 参数1、name名称和id 参数2、属性值 A为下拉框的value值 ?>
+                	</td>
+                	<td align="left"></td>
+            </tr>
+           
+             <tr>
+                <td align="right" class="l-table-edit-td">上传图片: &nbsp;</td>
+                <td align="left" class="l-table-edit-td">
+                <input type="file" name="file_upload" id="file_upload" />
+<!--<p><a href="javascript:$('#file_upload').uploadify('upload','*');">上传</a> -->
+<!--动态传值  $('#file_upload').uploadify('settings', 'formData', {'typeCode':document.getElementById('id_file').value}); -->
+<p>
+<a href="javascript:$('#file_upload').uploadify('cancel','*')">重置上传队列</a>
+</p>
+<input type="hidden" value="1215154" name="tmpdir" id="id_file">
+                <input type="hidden" name="userId" id="userId"value="<?php echo $userInfo["userId"];?>" />
+ 				<input type="hidden" name="userIp" id="userIp"value="<?php echo ip2long($_SERVER["REMOTE_ADDR"]);?>" />
+              
+                </td>
+                <td align="left"></td>
+            </tr>
+        </table>
+        </p>
+			
+		</div>
+		<div class="formBar">
+			<ul>
+				<!--<li><a class="buttonActive" href="javascript:;"><span>保存</span></a></li>-->
+				<li><div class="buttonActive"><div class="buttonContent"><button type="button" onclick="javascript:$('#file_upload').uploadify('settings', 'formData', {
+					'typeCode':document.getElementById('id_file').value,
+					'stadiumId':document.getElementById('stadiumId').value,
+					'userId':document.getElementById('userId').value,
+					'userIp':document.getElementById('userIp').value
+					});$('#file_upload').uploadify('upload','*')">保存</button></div></div></li>
+				<li>
+					<div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div>
+				</li>
+			</ul>
+		</div>
+	</form>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
